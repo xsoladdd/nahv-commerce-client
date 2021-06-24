@@ -19,7 +19,6 @@ const routes = [
     name: "Profile",
     component: Home,
     exact: true,
-    private: true,
   },
   // { path: "/trips", name: "trip", component: TripList },
   // { path: "/theme", name: "Theme", component: Colors, exact: true },

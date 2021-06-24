@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 // import "./header.scss";
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import cookies from "js-cookie";
 import { headerInterface, navbar } from "./interface";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
-const Header: React.FC<headerInterface> = ({}) => {
+const Header: React.FC<headerInterface> = ({ accessToken, logout }) => {
   const history = useHistory();
 
   const navBar: navbar[] = [
@@ -58,9 +58,11 @@ const Header: React.FC<headerInterface> = ({}) => {
               return (
                 <Nav.Link
                   key={index}
-                  as={Link}
+                  as={NavLink}
+                  exact={true}
+                  activeClassName="active"
                   to={to}
-                  active={history.location.pathname === to}
+                  // activeClass={"active"}
                 >
                   {name}
                 </Nav.Link>
@@ -74,10 +76,11 @@ const Header: React.FC<headerInterface> = ({}) => {
               >
                 {items.map(({ to: pathLevelTwo, name }, index) => (
                   <NavDropdown.Item
-                    as={Link}
+                    as={NavLink}
+                    activeClassName="active"
+                    exact={true}
                     to={`${to}${pathLevelTwo}`}
                     key={index}
-                    active={history.location.pathname === to}
                   >
                     {name}
                   </NavDropdown.Item>
@@ -87,26 +90,29 @@ const Header: React.FC<headerInterface> = ({}) => {
           })}
         </Nav>
         <Nav>
-          {cookies.get("access_token") ? (
+          {accessToken ? (
             <>
               {" "}
               <Nav.Link
-                as={Link}
+                as={NavLink}
+                activeClassName="active"
                 to="/profile"
-                active={history.location.pathname === "/profile"}
+                // activeStyle={"active"}
               >
                 Profile
               </Nav.Link>
               <Nav.Link
-                as={Link}
+                as={NavLink}
+                activeClassName="active"
                 to="/cart"
-                active={history.location.pathname === "/cart"}
+                exact={true}
               >
                 Cart
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  cookies.remove("access_token");
+                  logout();
+                  // setIsAuthenticated(false);
                   history.push("/");
                 }}
               >
@@ -116,16 +122,18 @@ const Header: React.FC<headerInterface> = ({}) => {
           ) : (
             <>
               <Nav.Link
-                as={Link}
+                as={NavLink}
+                activeClassName="active"
                 to={"/register"}
-                active={history.location.pathname === "/register"}
+                exact={true}
               >
                 Register
               </Nav.Link>
               <Nav.Link
-                as={Link}
+                as={NavLink}
+                activeClassName="active"
                 to="/login"
-                active={history.location.pathname === "/login"}
+                exact={true}
               >
                 Sign In
               </Nav.Link>
