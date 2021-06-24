@@ -1,0 +1,2 @@
+.loading-wrapper{position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,.8);display:grid;-webkit-justify-content:center;justify-content:center}.loading-wrapper .content{margin-top:20vh;max-height:30vh;min-width:20vw;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;padding-top:5rem;text-transform:uppercase;color:#f1f1f1;place-items:center}.loading-wrapper h4{padding-top:2rem}
+/*# sourceMappingURL=main.ce73480b.chunk.css.map */
